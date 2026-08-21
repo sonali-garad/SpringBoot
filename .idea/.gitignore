@@ -3,3 +3,8 @@
 /workspace.xml
 # Maven build output
 target/
+# IntelliJ IDEA
+.idea/
+
+# Maven
+target/
