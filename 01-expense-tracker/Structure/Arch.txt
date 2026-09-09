@@ -1,0 +1,58 @@
+👤 User
+   │
+   ├── Creates categories
+   │      Food
+   │      Travel
+   │      Shopping
+   │
+   └── Adds expenses
+          Pizza      ₹500
+          Uber       ₹300
+          Shoes      ₹2000
+
+-----------------------------------------------------------------------------------------------------------------
+
+                 CLIENT
+       (React / Mobile / Postman)
+                      │
+                      │ HTTP Request
+                      ▼
+          ┌───────────────────────┐
+          │    REST API           │
+          │   Spring Boot App     │
+          └───────────┬───────────┘
+                      │
+                      ▼
+               Controller Layer
+              Receives Requests
+                      │
+                      ▼
+                Service Layer
+              Business Logic
+                      │
+                      ▼
+              Repository Layer
+            Database Operations
+                      │
+                      ▼
+                 MySQL DB
+
+----------------------------------------------------------------------------------------------------------------
+
+REST APIs
+↓
+Layered architecture
+↓
+Database integration
+↓
+JPA/Hibernate
+↓
+Relationships
+↓
+Validation
+↓
+Exception handling
+↓
+Pagination/filtering
+↓
+Authentication & Authorization
