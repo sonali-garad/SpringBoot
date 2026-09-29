@@ -17,16 +17,9 @@ public class ExpenseController {
     @Autowired
     ExpenseService expenseService;
 
-    @GetMapping
-    public ResponseEntity<String> getExpense() {
-
-        return ResponseEntity.ok("Expense created 1");
-    }
-
     @PostMapping("/create")
     public ResponseEntity<ExpenseResponse> createExpense(@RequestBody ExpenseRequest expenseRequest) {
         System.out.println("expreq " + expenseRequest);
-        System.out.println("create expense controller here ");
         ExpenseResponse response = expenseService.createExpense(expenseRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
