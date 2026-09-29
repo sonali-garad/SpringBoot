@@ -1,8 +1,17 @@
 package com.expense.demo.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
+
 import java.time.LocalDate;
 
+@Entity
 public class Expense {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String title;
     int amount;
@@ -10,9 +19,8 @@ public class Expense {
     String category;
     String description;
 
-    public int getId()
-    {
-        return  id ;
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {

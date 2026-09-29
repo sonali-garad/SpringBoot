@@ -48,4 +48,15 @@ public class ExpenseRequest {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "ExpenseRequest{" +
+                "title='" + title + '\'' +
+                ", amount=" + amount +
+                ", date=" + date +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
