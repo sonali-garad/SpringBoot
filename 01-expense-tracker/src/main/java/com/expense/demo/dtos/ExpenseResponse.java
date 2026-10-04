@@ -57,4 +57,16 @@ public class ExpenseResponse {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "ExpenseResponse{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", amount=" + amount +
+                ", date=" + date +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

@@ -50,4 +50,36 @@ public class ExpenseService {
 
    return expenseResponse;
     }
+
+    public ExpenseResponse updateExpense (int id, ExpenseRequest expense)
+    {
+        Expense existingResponse = expenseRepository.findById(id).orElseThrow(()-> new ExpenseNotFoundException("Record not found for this ID "+id));
+
+        ExpenseResponse expenseResponseEntity = new ExpenseResponse();
+        expenseResponseEntity.setCategory(expense.getCategory());
+        expenseResponseEntity.setDate(expense.getDate());
+        expenseResponseEntity.setDescription(expense.getDescription());
+        expenseResponseEntity.setAmount(expense.getAmount());
+        expenseResponseEntity.setTitle(expense.getTitle());
+        expenseResponseEntity.setId(id);
+
+        existingResponse.setDate(expense.getDate());
+        existingResponse.setAmount(expense.getAmount());
+        existingResponse.setTitle(expense.getTitle());
+        existingResponse.setDescription(expense.getDescription());
+        existingResponse.setCategory(expense.getCategory());
+        expenseRepository.save(existingResponse);
+
+        return expenseResponseEntity;
+    }
+
+    public String deleteById (int id )
+    {
+       Expense expense =  expenseRepository.findById(id).orElseThrow(()-> new ExpenseNotFoundException("Id not found "+id));
+       expenseRepository.delete(expense);
+        return "Record has been deleted for ID "+id;
+
+    }
+
+
 }

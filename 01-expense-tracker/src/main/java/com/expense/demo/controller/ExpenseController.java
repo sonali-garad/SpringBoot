@@ -30,4 +30,18 @@ public class ExpenseController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PostMapping("/id")
+    public ResponseEntity<ExpenseResponse> updateResponse(@RequestParam int id, @RequestBody ExpenseRequest expense) {
+        System.out.println("expense " + expense);
+        ExpenseResponse expenseResponse = expenseService.updateExpense(id, expense);
+        return ResponseEntity.status(HttpStatus.OK).body(expenseResponse);
+    }
+
+    @DeleteMapping("/id")
+    public ResponseEntity<String> deleteById(@RequestParam int id) {
+        // NO_CONTENT - would not return anything for client
+        return ResponseEntity.status(HttpStatus.OK).body(expenseService.deleteById(id));
+
+    }
+
 }

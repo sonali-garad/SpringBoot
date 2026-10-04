@@ -66,4 +66,16 @@ public class Expense {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", amount=" + amount +
+                ", date=" + date +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
