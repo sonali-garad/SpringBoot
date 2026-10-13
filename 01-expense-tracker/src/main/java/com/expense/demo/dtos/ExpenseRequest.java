@@ -1,12 +1,25 @@
 package com.expense.demo.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDate;
 
 public class ExpenseRequest {
+
+    @NotBlank
     String title;
+
+    @Positive
     int amount;
+
+    @NotNull
     LocalDate date;
+
+    @NotBlank
     String category;
+
     String description;
 
     public String getTitle() {

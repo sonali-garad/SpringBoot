@@ -32,6 +32,7 @@ public class ExpenseService {
         expenseResponse.setDate(savedExpense.getDate());
         expenseResponse.setDescription(savedExpense.getDescription());
         expenseResponse.setId(savedExpense.getId());
+        expenseResponse.setTitle((savedExpense.getTitle()));
 
         return expenseResponse;
     }
