@@ -8,16 +8,17 @@ import java.time.LocalDate;
 
 public class ExpenseRequest {
 
-    @NotBlank
+    @NotBlank(message = "Title is required")
     String title;
 
-    @Positive
+    @Positive(message = "Amount should be positive integer")
+    @NotNull(message = "Amount is required")
     int amount;
 
-    @NotNull
+    @NotNull(message = "Date shouldn't be null")
     LocalDate date;
 
-    @NotBlank
+    @NotBlank(message = "Category is required")
     String category;
 
     String description;

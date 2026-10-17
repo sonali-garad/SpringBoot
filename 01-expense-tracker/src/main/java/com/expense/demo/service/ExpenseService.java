@@ -6,6 +6,8 @@ import com.expense.demo.entity.Expense;
 import com.expense.demo.exception.ExpenseNotFoundException;
 import com.expense.demo.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,7 +25,8 @@ public class ExpenseService {
         expense.setDescription(expenseRequest.getDescription());
         expense.setTitle(expenseRequest.getTitle());
         expense.setDate(expenseRequest.getDate());
-        // we could do directly repo.save - but in that case we couldn't access the id field as it's persistence
+        // we could do directly repo.save - but in that case we couldn't access the id
+        // field as it's persistence
         Expense savedExpense = expenseRepository.save(expense);
 
         ExpenseResponse expenseResponse = new ExpenseResponse();
@@ -39,22 +42,23 @@ public class ExpenseService {
 
     public ExpenseResponse getResponseById(int id) {
 
-  Expense expense = expenseRepository.findById(id).orElseThrow(() -> new ExpenseNotFoundException("Record not found for ID: "+id));
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() -> new ExpenseNotFoundException("Record not found for ID: " + id));
 
-   ExpenseResponse expenseResponse = new ExpenseResponse();
-   expenseResponse.setAmount(expense.getAmount());
-   expenseResponse.setDate(expense.getDate());
-   expenseResponse.setDescription(expense.getDescription());
-   expenseResponse.setTitle(expense.getTitle());
-   expenseResponse.setCategory(expense.getCategory());
-   expenseResponse.setId(expense.getId());
+        ExpenseResponse expenseResponse = new ExpenseResponse();
+        expenseResponse.setAmount(expense.getAmount());
+        expenseResponse.setDate(expense.getDate());
+        expenseResponse.setDescription(expense.getDescription());
+        expenseResponse.setTitle(expense.getTitle());
+        expenseResponse.setCategory(expense.getCategory());
+        expenseResponse.setId(expense.getId());
 
-   return expenseResponse;
+        return expenseResponse;
     }
 
-    public ExpenseResponse updateExpense (int id, ExpenseRequest expense)
-    {
-        Expense existingResponse = expenseRepository.findById(id).orElseThrow(()-> new ExpenseNotFoundException("Record not found for this ID "+id));
+    public ExpenseResponse updateExpense(int id, ExpenseRequest expense) {
+        Expense existingResponse = expenseRepository.findById(id)
+                .orElseThrow(() -> new ExpenseNotFoundException("Record not found for this ID " + id));
 
         ExpenseResponse expenseResponseEntity = new ExpenseResponse();
         expenseResponseEntity.setCategory(expense.getCategory());
@@ -74,13 +78,28 @@ public class ExpenseService {
         return expenseResponseEntity;
     }
 
-    public String deleteById (int id )
-    {
-       Expense expense =  expenseRepository.findById(id).orElseThrow(()-> new ExpenseNotFoundException("Id not found "+id));
-       expenseRepository.delete(expense);
-        return "Record has been deleted for ID "+id;
+    public String deleteById(int id) {
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() -> new ExpenseNotFoundException("Id not found " + id));
+        expenseRepository.delete(expense);
+        return "Record has been deleted for ID " + id;
 
     }
 
+    public Page<ExpenseResponse> getAllExpenseByPagination(Pageable pageable) {
+        Page<Expense> expenses = expenseRepository.findAll(pageable);
+
+        return expenses.map(expense -> {
+            ExpenseResponse response = new ExpenseResponse();
+            response.setTitle(expense.getTitle());
+            response.setDate(expense.getDate());
+            response.setAmount(expense.getAmount());
+            response.setDescription(expense.getDescription());
+            response.setCategory(expense.getCategory());
+            response.setId(expense.getId());
+            return response;
+        });
+
+    }
 
 }

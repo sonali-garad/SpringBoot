@@ -6,6 +6,10 @@ import com.expense.demo.entity.Expense;
 import com.expense.demo.service.ExpenseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -43,6 +47,13 @@ public class ExpenseController {
         // NO_CONTENT - would not return anything for client
         return ResponseEntity.status(HttpStatus.OK).body(expenseService.deleteById(id));
 
+    }
+
+    @GetMapping("/records")
+    public Page<ExpenseResponse> getAllExpenseByPagination(
+            @PageableDefault(size = 10, sort = "date", page = 1, direction = Sort.Direction.DESC) Pageable pageable) {
+        System.out.println("pageable " + pageable);
+        return expenseService.getAllExpenseByPagination(pageable);
     }
 
 }
