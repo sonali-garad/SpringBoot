@@ -78,4 +78,21 @@ public class Expense {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    //  @Override
+    // public String toString() {
+    //     return "Expense{" +
+    //             "id=" + id +
+    //             ", title='" + title + '\'' +
+    //             ", amount=" + amount +
+    //             ", date=" + date +
+    //             ", category='" + category + '\'' +
+    //             ", description='" + description + '\'' +
+    //             '}';
+    // }
+
+
+
+
+    
 }
